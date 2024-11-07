@@ -1,0 +1,33 @@
+<ng-container *ngIf="data$ | async as data">
+  <div class="auth-page">
+    <div>
+      <a routerLink="/login">Have an account?</a>
+    </div>
+  </div>
+
+  <mc-backend-error-messages
+    *ngIf="data.backendErrors"
+    [backendErrors]="data.backendErrors">
+  </mc-backend-error-messages>
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <fieldset>
+        <input type="text" placeholder="User Name" formControlName="username" />
+      </fieldset>
+
+      <fieldset>
+        <input type="text" placeholder="Email" formControlName="email" />
+      </fieldset>
+
+      <fieldset>
+        <input
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+      </fieldset>
+
+      <button [disabled]="data.isSubmitting$" type="submit">Sign up</button>
+    </form>
+  </div>
+</ng-container>
